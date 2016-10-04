@@ -1,7 +1,6 @@
 package com.controller;
 
 import com.entity.User;
-import com.repository.UserRepository;
 import com.service.UserServise;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.sql.Blob;
 
 /**
  * Created by bohdan on 26.09.16.

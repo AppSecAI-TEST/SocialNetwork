@@ -2,17 +2,17 @@ package com.service.impl;
 
 import com.entity.User;
 import com.entity.UserRole;
-import com.repository.Ur;
+import com.repository.UserRoleRepository;
 import com.repository.UserRepository;
 import com.service.UserServise;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.io.File;
-import java.io.FileInputStream;
-import java.sql.Blob;
 import java.util.List;
 
 /**
@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserServise {
     @Resource
     private UserRepository userRepository;
     @Resource
-    private Ur ur;
+    private UserRoleRepository userRoleRepository;
     @Override
     public User create(User user) {
         User createUser = user;
@@ -78,10 +78,19 @@ public class UserServiceImpl implements UserServise {
         user.setAvatar(avatar);
         userRole.setUser(user);
         userRole.setRole("ROLE_USER");
-        ur.save(userRole);
+        userRoleRepository.save(userRole);
         Thread.sleep(200);
         userRepository.save(user);
-
-
     }
+
+    @Override
+    public User getCurrentUser() {
+        User user;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        String name =userDetail.getUsername();
+        return user = findByUserName(name);
+    }
+
+
 }

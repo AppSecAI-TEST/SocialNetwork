@@ -16,4 +16,5 @@ public interface UserServise {
      User findById(long id);
      User findByUserName(String username);
      void addUser(String name, String surname, String info, String username, String password, String avatar) throws InterruptedException;
+     User getCurrentUser();
 }

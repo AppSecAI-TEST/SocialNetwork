@@ -20,7 +20,7 @@ import java.util.List;
 public class MainController {
     @Autowired
     UserServise questionServise;
-    @RequestMapping("/")
+    @RequestMapping("/freinds")
     public ModelAndView getAllBooks() {
         List<User> bookList = questionServise.findAll();
         return new ModelAndView("booksList", "booksList", bookList);
@@ -28,11 +28,15 @@ public class MainController {
 
     @RequestMapping(value = "editBook")
     public ModelAndView editBooks(@ModelAttribute(value = "book") User book) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetail = (UserDetails) auth.getPrincipal();
-        String name =userDetail.getUsername();
-        book = questionServise.findByUserName(name);
+        book = questionServise.getCurrentUser();
         return new ModelAndView("booksForm", "bookObject", book);
+    }
+
+
+    @RequestMapping("/")
+    public ModelAndView main(@ModelAttribute(value = "book") User book) {
+        book = questionServise.getCurrentUser();
+        return new ModelAndView("Main", "bookObject", book);
     }
 
     @RequestMapping("saveBook")
