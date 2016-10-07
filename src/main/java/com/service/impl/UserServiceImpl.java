@@ -1,16 +1,21 @@
 package com.service.impl;
 
+import com.config.AppConfig;
 import com.entity.User;
 import com.entity.UserRole;
 import com.repository.UserRoleRepository;
 import com.repository.UserRepository;
 import com.service.UserServise;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -25,6 +30,8 @@ public class UserServiceImpl implements UserServise {
     private UserRepository userRepository;
     @Resource
     private UserRoleRepository userRoleRepository;
+    @Autowired
+    AppConfig appConfig;
     @Override
     public User create(User user) {
         User createUser = user;
@@ -66,6 +73,11 @@ public class UserServiceImpl implements UserServise {
     }
 
     @Override
+    public User getUser(long id) {
+        return  userRepository.getUser(id);
+    }
+
+    @Override
     public void addUser(String name, String surname, String info, String username, String password, String avatar) throws InterruptedException {
         User user = new User();
         UserRole userRole = new UserRole();
@@ -84,12 +96,33 @@ public class UserServiceImpl implements UserServise {
     }
 
     @Override
+    @Transactional
     public User getCurrentUser() {
         User user;
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetail = (UserDetails) auth.getPrincipal();
         String name =userDetail.getUsername();
         return user = findByUserName(name);
+    }
+
+    @Override
+    @Transactional
+    public void addToFriends(long id) {
+        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+        def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
+        TransactionStatus status = appConfig.transactionManager().getTransaction(def);
+        try {
+            User user = getUser(id);
+            User user1 = getCurrentUser();
+            user1.getColleagues().add(user);
+            userRepository.save(user1);
+        }
+        catch (Exception ex) {
+            appConfig.transactionManager().rollback(status);
+            throw ex;
+        }
+        appConfig.transactionManager().commit(status);
+
     }
 
 

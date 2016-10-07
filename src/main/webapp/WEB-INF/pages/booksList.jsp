@@ -213,7 +213,7 @@
                         </div>
                         <sec:authorize access="hasRole('ROLE_USER')">
                             <div class="add-button">
-                                <a class="add-button-link" href="editBook">Add</a>
+                                <a class="add-button-link" href="addToFriends?id=<c:out value='${book.id}'/>">Add</a>
                             </div>
                         </sec:authorize>
                     </div>

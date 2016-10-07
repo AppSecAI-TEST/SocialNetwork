@@ -2,6 +2,9 @@ package com.entity;
 
 
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,6 +38,13 @@ public class User {
     private byte[] avatar;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private Set<UserRole> userRole = new HashSet<>(0);
+    @ManyToMany(cascade={CascadeType.ALL})
+    @JoinTable(name="user_friend",
+            joinColumns={@JoinColumn(name="user_id")},
+            inverseJoinColumns={@JoinColumn(name="friend_id")})
+    private Set<User> colleagues = new HashSet<>();
+    @ManyToMany(mappedBy="colleagues")
+    private Set<User> teammates = new HashSet<>();
 
 
     public long getId() {
@@ -130,4 +140,19 @@ public class User {
         return encoded;
     }
 
+    public Set<User> getColleagues() {
+        return colleagues;
+    }
+
+    public void setColleagues(Set<User> colleagues) {
+        this.colleagues = colleagues;
+    }
+
+    public Set<User> getTeammates() {
+        return teammates;
+    }
+
+    public void setTeammates(Set<User> teammates) {
+        this.teammates = teammates;
+    }
 }

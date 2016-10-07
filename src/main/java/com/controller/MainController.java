@@ -20,34 +20,41 @@ import java.util.List;
 public class MainController {
     @Autowired
     UserServise questionServise;
-    @RequestMapping("/freinds")
-    public ModelAndView getAllBooks() {
-        List<User> bookList = questionServise.findAll();
-        return new ModelAndView("booksList", "booksList", bookList);
+
+    @RequestMapping("friends")
+    public ModelAndView getAllUsers() {
+        List<User> userList = questionServise.findAll();
+        return new ModelAndView("booksList", "booksList", userList);
     }
 
     @RequestMapping(value = "editBook")
-    public ModelAndView editBooks(@ModelAttribute(value = "book") User book) {
-        book = questionServise.getCurrentUser();
-        return new ModelAndView("booksForm", "bookObject", book);
+    public ModelAndView editUser(@ModelAttribute(value = "book") User user) {
+        user = questionServise.getCurrentUser();
+        return new ModelAndView("booksForm", "bookObject", user);
     }
 
 
     @RequestMapping("/")
-    public ModelAndView main(@ModelAttribute(value = "book") User book) {
-        book = questionServise.getCurrentUser();
-        return new ModelAndView("Main", "bookObject", book);
+    public ModelAndView main(@ModelAttribute(value = "book") User user) {
+        user = questionServise.getCurrentUser();
+        return new ModelAndView("Main", "bookObject", user);
     }
 
     @RequestMapping("saveBook")
-    public ModelAndView saveBooks(@ModelAttribute User book) {
-            questionServise.update(book);
+    public ModelAndView saveUser(@ModelAttribute User user) {
+            questionServise.update(user);
         return new ModelAndView("redirect:/");
     }
+    @RequestMapping("addToFriends")
+    public ModelAndView addToFriends(@RequestParam Long id) {
+        questionServise.addToFriends(id);
+        return new ModelAndView("redirect:friends");
+    }
+
     @RequestMapping(value = "searchBook",method = RequestMethod.GET,headers="Accept=application/json")
     @ResponseBody
-    public User searchBook(@RequestParam("searchName") String searchName) {
-        User booksList = questionServise.findByUserName(searchName);
-        return booksList;
+    public User searchUser(@RequestParam("searchName") String searchName) {
+        User userList = questionServise.findByUserName(searchName);
+        return userList;
     }
 }

@@ -2,6 +2,7 @@
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
@@ -47,6 +48,11 @@
                 <div class="form-group">
                     <form:label path="avatar" cssClass="control-label col-xs-3"><img src="data:image/jpeg;base64,${bookObject.getImgAsBase64()}"></form:label>
                 </div>
+                <sec:authorize access="hasRole('ROLE_USER')">
+                    <div class="add-button">
+                        <a class="add-button-link" href="editBook">Add</a>
+                    </div>
+                </sec:authorize>
             </form:form>
         </div>
     </div>
