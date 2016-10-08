@@ -38,12 +38,9 @@ public class User {
     private byte[] avatar;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private Set<UserRole> userRole = new HashSet<>(0);
-    @ManyToMany(cascade={CascadeType.ALL})
-    @JoinTable(name="user_friend",
-            joinColumns={@JoinColumn(name="user_id")},
-            inverseJoinColumns={@JoinColumn(name="friend_id")})
+    @OneToMany(mappedBy = "colleagues", cascade=CascadeType.ALL)
     private Set<User> colleagues = new HashSet<>();
-    @ManyToMany(mappedBy="colleagues")
+    @OneToMany(mappedBy = "teammates")
     private Set<User> teammates = new HashSet<>();
 
 

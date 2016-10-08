@@ -13,9 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-/**
- * Created by bohdan on 15.09.16.
- */
 @Controller
 public class MainController {
     @Autowired
@@ -51,6 +48,11 @@ public class MainController {
         return new ModelAndView("redirect:friends");
     }
 
+    @RequestMapping("sendMassage")
+    public ModelAndView sendMassage(@RequestParam Long id) {
+        questionServise.addToFriends(id);
+        return new ModelAndView("redirect:friends");
+    }
     @RequestMapping(value = "searchBook",method = RequestMethod.GET,headers="Accept=application/json")
     @ResponseBody
     public User searchUser(@RequestParam("searchName") String searchName) {

@@ -30,8 +30,8 @@ public class UserServiceImpl implements UserServise {
     private UserRepository userRepository;
     @Resource
     private UserRoleRepository userRoleRepository;
-    @Autowired
-    AppConfig appConfig;
+   // @Autowired
+   // private AppConfig appConfig;
     @Override
     public User create(User user) {
         User createUser = user;
@@ -96,7 +96,6 @@ public class UserServiceImpl implements UserServise {
     }
 
     @Override
-    @Transactional
     public User getCurrentUser() {
         User user;
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -106,9 +105,8 @@ public class UserServiceImpl implements UserServise {
     }
 
     @Override
-    @Transactional
     public void addToFriends(long id) {
-        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+    /*    DefaultTransactionDefinition def = new DefaultTransactionDefinition();
         def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
         TransactionStatus status = appConfig.transactionManager().getTransaction(def);
         try {
@@ -121,9 +119,6 @@ public class UserServiceImpl implements UserServise {
             appConfig.transactionManager().rollback(status);
             throw ex;
         }
-        appConfig.transactionManager().commit(status);
-
+        appConfig.transactionManager().commit(status);*/
     }
-
-
 }
