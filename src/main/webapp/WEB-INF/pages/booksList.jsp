@@ -216,6 +216,7 @@
                                 <a class="add-button-link" href="addToFriends?id=<c:out value='${book.id}'/>">Add</a>
                             </div>
                         </sec:authorize>
+                        <a class="add-button-link" href="accept?id=<c:out value='${book.id}'/>">Add</a>
                     </div>
                 </div>
             </div>

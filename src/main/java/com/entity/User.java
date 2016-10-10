@@ -40,7 +40,7 @@ public class User {
     private Set<UserRole> userRole = new HashSet<>(0);
     @OneToMany(mappedBy = "colleagues", cascade=CascadeType.ALL)
     private Set<User> colleagues = new HashSet<>();
-    @OneToMany(mappedBy = "teammates")
+    @OneToMany(mappedBy = "teammates", cascade=CascadeType.ALL)
     private Set<User> teammates = new HashSet<>();
 
 

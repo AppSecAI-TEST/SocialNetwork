@@ -2,7 +2,9 @@ package com.service.impl;
 
 import com.config.AppConfig;
 import com.entity.User;
+import com.entity.UserFriend;
 import com.entity.UserRole;
+import com.repository.UserFriendRepository;
 import com.repository.UserRoleRepository;
 import com.repository.UserRepository;
 import com.service.UserServise;
@@ -29,9 +31,11 @@ public class UserServiceImpl implements UserServise {
     @Resource
     private UserRepository userRepository;
     @Resource
+    private UserFriendRepository userFriendRepository;
+    @Resource
     private UserRoleRepository userRoleRepository;
-   // @Autowired
-   // private AppConfig appConfig;
+    @Autowired
+    private AppConfig appConfig;
     @Override
     public User create(User user) {
         User createUser = user;
@@ -62,10 +66,6 @@ public class UserServiceImpl implements UserServise {
         return userRepository.saveAndFlush(updateQuestion);
     }
 
-    @Override
-    public User findById(long id) {
-        return userRepository.findOne(id);
-    }
 
     @Override
     public User findByUserName(String username) {
@@ -106,19 +106,40 @@ public class UserServiceImpl implements UserServise {
 
     @Override
     public void addToFriends(long id) {
-    /*    DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
         def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
         TransactionStatus status = appConfig.transactionManager().getTransaction(def);
         try {
+            UserFriend userFriend = new UserFriend();
             User user = getUser(id);
             User user1 = getCurrentUser();
-            user1.getColleagues().add(user);
-            userRepository.save(user1);
+            userFriend.setFirsUser(user1);
+            userFriend.setSecondUser(user);
+            userFriend.setAccept(0);
+            userFriendRepository.save(userFriend);
         }
         catch (Exception ex) {
             appConfig.transactionManager().rollback(status);
             throw ex;
         }
-        appConfig.transactionManager().commit(status);*/
+        appConfig.transactionManager().commit(status);
+    }
+
+    @Override
+    public void accept(long id) {
+        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+        def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
+        TransactionStatus status = appConfig.transactionManager().getTransaction(def);
+        try {
+         User user = userRepository.getUser(id);
+        UserFriend userFriend = userFriendRepository.acceptFriend(user);
+        userFriend.setAccept(1);
+        userFriendRepository.saveAndFlush(userFriend);
+        }
+        catch (Exception ex) {
+            appConfig.transactionManager().rollback(status);
+            throw ex;
+        }
+        appConfig.transactionManager().commit(status);
     }
 }

@@ -1,53 +1,56 @@
 package com.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by bohdan on 08.10.16.
  */
 @Entity
 @Table(name = "user_friend")
-@AssociationOverrides({
-        @AssociationOverride(name = "colleagues",
-                joinColumns = @JoinColumn(name = "user_id")),
-        @AssociationOverride(name = "teammates",
-                joinColumns = @JoinColumn(name = "friend_id")) })
-public class UserFriend {
-    @EmbeddedId
-    private UserFriendId userFriendId;
-    @Column(name = "accept")
-    private boolean accept;
+public class UserFriend implements Serializable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_friend_id", nullable = false)
+    private long id;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User firsUser;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "friend_id")
+    private User secondUser;
+    @Column(name = "activated")
+    private int accept;
 
-    public boolean isAccept() {
+    public int getAccept() {
         return accept;
     }
 
-    public void setAccept(boolean accept) {
+    public void setAccept(int accept) {
         this.accept = accept;
     }
 
-    public UserFriendId getUserFriendId() {
-        return userFriendId;
-    }
-
-    public void setUserFriendId(UserFriendId userFriendId) {
-        this.userFriendId = userFriendId;
-    }
-
-    @Transient
-    public User getFirstUser() {
-        return getUserFriendId().getFirstUser();
-    }
-
-    public void setFirstUser(User firstUser) {
-        getUserFriendId().setFirstUser(firstUser);
-    }
-    @Transient
     public User getSecondUser() {
-        return getUserFriendId().getSecondUser();
+        return secondUser;
     }
 
     public void setSecondUser(User secondUser) {
-        getUserFriendId().setSecondUser(secondUser);
+        this.secondUser = secondUser;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public User getFirsUser() {
+        return firsUser;
+    }
+
+    public void setFirsUser(User firsUser) {
+        this.firsUser = firsUser;
     }
 }

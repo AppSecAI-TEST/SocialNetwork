@@ -13,10 +13,10 @@ public interface UserServise {
      User delete(long id) ;
      List<User> findAll();
      User update(User question);
-     User findById(long id);
      User findByUserName(String username);
      User getUser(long id);
      void addUser(String name, String surname, String info, String username, String password, String avatar) throws InterruptedException;
      User getCurrentUser();
      void addToFriends(long user);
+     void accept(long id);
 }

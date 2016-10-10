@@ -48,6 +48,12 @@ public class MainController {
         return new ModelAndView("redirect:friends");
     }
 
+    @RequestMapping("friends/accept")
+    public ModelAndView accept(@RequestParam Long id) {
+        questionServise.accept(id);
+        return new ModelAndView("redirect:friends");
+    }
+
     @RequestMapping("sendMassage")
     public ModelAndView sendMassage(@RequestParam Long id) {
         questionServise.addToFriends(id);
