@@ -19,4 +19,5 @@ public interface UserServise {
      User getCurrentUser();
      void addToFriends(long user);
      void accept(long id);
+     void sandMassage(long id ,String s);
 }

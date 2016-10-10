@@ -3,8 +3,10 @@ package com.service.impl;
 import com.config.AppConfig;
 import com.entity.User;
 import com.entity.UserFriend;
+import com.entity.UserMassageUser;
 import com.entity.UserRole;
 import com.repository.UserFriendRepository;
+import com.repository.UserMassageUserRepository;
 import com.repository.UserRoleRepository;
 import com.repository.UserRepository;
 import com.service.UserServise;
@@ -34,6 +36,8 @@ public class UserServiceImpl implements UserServise {
     private UserFriendRepository userFriendRepository;
     @Resource
     private UserRoleRepository userRoleRepository;
+    @Resource
+    private UserMassageUserRepository userMassageUserRepository;
     @Autowired
     private AppConfig appConfig;
     @Override
@@ -141,5 +145,34 @@ public class UserServiceImpl implements UserServise {
             throw ex;
         }
         appConfig.transactionManager().commit(status);
+    }
+
+    @Override
+    public void sandMassage(long id , String s) {
+        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+        def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
+        TransactionStatus status = appConfig.transactionManager().getTransaction(def);
+        try {
+          /*  User user = getCurrentUser();
+            User user1 = userRepository.getUser(id);
+            UserMassageUser userMassageUser = userMassageUserRepository.massage(user,user1);
+            userMassageUser.setFirsUser(user);
+            userMassageUser.setSecondUser(user1);
+            userMassageUser.setMassage(s);
+            userMassageUserRepository.saveAndFlush(userMassageUser);*/
+            UserMassageUser userMassageUser = new UserMassageUser();
+            User user = getUser(id);
+            User user1 = getCurrentUser();
+            userMassageUser.setFirsUser(user1);
+            userMassageUser.setSecondUser(user);
+            userMassageUser.setMassage(s);
+            userMassageUserRepository.save(userMassageUser);
+        }
+        catch (Exception ex) {
+            appConfig.transactionManager().rollback(status);
+            throw ex;
+        }
+        appConfig.transactionManager().commit(status);
+
     }
 }

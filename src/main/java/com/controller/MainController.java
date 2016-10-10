@@ -2,6 +2,7 @@ package com.controller;
 
 
 import com.entity.User;
+import com.entity.UserMassageUser;
 import com.service.UserServise;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -45,19 +46,19 @@ public class MainController {
     @RequestMapping("addToFriends")
     public ModelAndView addToFriends(@RequestParam Long id) {
         questionServise.addToFriends(id);
-        return new ModelAndView("redirect:friends");
+        return new ModelAndView("redirect:/friends");
     }
 
     @RequestMapping("friends/accept")
     public ModelAndView accept(@RequestParam Long id) {
         questionServise.accept(id);
-        return new ModelAndView("redirect:friends");
+        return new ModelAndView("redirect:/friends");
     }
 
-    @RequestMapping("sendMassage")
-    public ModelAndView sendMassage(@RequestParam Long id) {
-        questionServise.addToFriends(id);
-        return new ModelAndView("redirect:friends");
+    @RequestMapping("friends/sand")
+    public ModelAndView sandMassage(@RequestParam Long id, @RequestParam String massage) {
+        questionServise.sandMassage(id,massage);
+        return new ModelAndView("redirect:/friends");
     }
     @RequestMapping(value = "searchBook",method = RequestMethod.GET,headers="Accept=application/json")
     @ResponseBody

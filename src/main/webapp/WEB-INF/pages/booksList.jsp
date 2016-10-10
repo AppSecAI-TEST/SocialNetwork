@@ -2,6 +2,7 @@
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -173,6 +174,11 @@
                 </div>
             </h3>
         </div>
+            <form:form id="usersRegisterForm" cssClass="form-horizontal"  method="post" action="sand" >
+                <input name="id" type="text">
+                <input class="form-control" type='text' name='massage' placeholder="massage...">
+                <input type="submit" class="btn btn-primary" value="sand"/>
+            </form:form>
         </sec:authorize>
         <div class="panel-body">
             <form action="searchBook">
