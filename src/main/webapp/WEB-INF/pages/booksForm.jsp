@@ -66,7 +66,8 @@
                 <div class="form-group">
                     <form:label path="avatar" cssClass="control-label col-xs-3">img</form:label>
                     <div class="col-xs-6">
-                        <form:input path="avatar" type="file" value="${bookObject.getImgAsBase64()}"/>
+                        <form:input path="avatar" type="file" value="${bookObject.avatar}"/>
+                        <img src="data:image/jpeg;base64,${bookObject.getImgAsBase64()}">
                     </div>
                 </div>
 
@@ -81,7 +82,6 @@
                         </div>
                     </div>
                 </div>
-
             </form:form>
         </div>
     </div>

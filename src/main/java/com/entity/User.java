@@ -42,7 +42,8 @@ public class User {
     private Set<User> colleagues = new HashSet<>();
     @OneToMany(mappedBy = "teammates", cascade=CascadeType.ALL)
     private Set<User> teammates = new HashSet<>();
-
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Event> events = new HashSet<>(0);
 
     public long getId() {
         return id;
@@ -151,5 +152,13 @@ public class User {
 
     public void setTeammates(Set<User> teammates) {
         this.teammates = teammates;
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
     }
 }

@@ -153,20 +153,13 @@ public class UserServiceImpl implements UserServise {
         def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
         TransactionStatus status = appConfig.transactionManager().getTransaction(def);
         try {
-          /*  User user = getCurrentUser();
-            User user1 = userRepository.getUser(id);
-            UserMassageUser userMassageUser = userMassageUserRepository.massage(user,user1);
-            userMassageUser.setFirsUser(user);
-            userMassageUser.setSecondUser(user1);
-            userMassageUser.setMassage(s);
-            userMassageUserRepository.saveAndFlush(userMassageUser);*/
-            UserMassageUser userMassageUser = new UserMassageUser();
+            UserMassageUser userFriend = new UserMassageUser();
             User user = getUser(id);
             User user1 = getCurrentUser();
-            userMassageUser.setFirsUser(user1);
-            userMassageUser.setSecondUser(user);
-            userMassageUser.setMassage(s);
-            userMassageUserRepository.save(userMassageUser);
+            userFriend.setFirsUser(user1);
+            userFriend.setSecondUser(user);
+            userFriend.setMassage(s);
+            userMassageUserRepository.save(userFriend);
         }
         catch (Exception ex) {
             appConfig.transactionManager().rollback(status);

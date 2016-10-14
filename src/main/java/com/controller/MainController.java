@@ -22,7 +22,7 @@ public class MainController {
     @RequestMapping("friends")
     public ModelAndView getAllUsers() {
         List<User> userList = questionServise.findAll();
-        return new ModelAndView("booksList", "booksList", userList);
+        return new ModelAndView("peoples", "booksList", userList);
     }
 
     @RequestMapping(value = "editBook")

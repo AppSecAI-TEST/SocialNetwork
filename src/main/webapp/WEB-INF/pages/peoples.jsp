@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -174,11 +173,6 @@
                 </div>
             </h3>
         </div>
-            <form:form id="usersRegisterForm" cssClass="form-horizontal"  method="post" action="sand" >
-                <input name="id" type="text">
-                <input class="form-control" type='text' name='massage' placeholder="massage...">
-                <input type="submit" class="btn btn-primary" value="sand"/>
-            </form:form>
         </sec:authorize>
         <div class="panel-body">
             <form action="searchBook">
@@ -221,6 +215,11 @@
                             <div class="add-button">
                                 <a class="add-button-link" href="addToFriends?id=<c:out value='${book.id}'/>">Add</a>
                             </div>
+                            <form:form id="form" cssClass="form-horizontal" method="post" action="sand">
+                                <input type="hidden" name="id" value="${book.id}"/>
+                                <input class="form-control" type='text' name='massage' placeholder="massage...">
+                                <input type="submit" class="btn btn-primary" value="sand"/>
+                            </form:form>
                         </sec:authorize>
                         <a class="add-button-link" href="accept?id=<c:out value='${book.id}'/>">Add</a>
                     </div>
