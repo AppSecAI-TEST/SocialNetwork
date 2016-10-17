@@ -156,6 +156,14 @@ public class UserServiceImpl implements UserServise {
         }
         appConfig.transactionManager().commit(status);
     }
+
+    @Override
+    public List<UserMassageUser> getAllMassage() {
+        User user =getCurrentUser();
+        List<UserMassageUser> userMassageUsers = userMassageUserRepository.massage(user);
+        return userMassageUsers;
+    }
+
     @Override
     public void createEvent(String head,String body) {
         DefaultTransactionDefinition def = new DefaultTransactionDefinition();
@@ -191,4 +199,5 @@ public class UserServiceImpl implements UserServise {
     public List<Event> getEvents() {
         return eventRepository.findAll();
     }
+
 }

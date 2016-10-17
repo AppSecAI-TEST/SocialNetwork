@@ -2,6 +2,7 @@ package com.service;
 
 import com.entity.Event;
 import com.entity.User;
+import com.entity.UserMassageUser;
 
 import java.sql.Blob;
 import java.util.List;
@@ -21,6 +22,7 @@ public interface UserServise {
      void addToFriends(long user);
      void accept(long id);
      void sandMassage(long id ,String s);
+     List<UserMassageUser> getAllMassage();
      void createEvent(String head, String body);
      Event deleteEvent(long id);
      Event editEvent(Event event);
