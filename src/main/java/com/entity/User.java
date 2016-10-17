@@ -42,8 +42,8 @@ public class User {
     private Set<User> colleagues = new HashSet<>();
     @OneToMany(mappedBy = "teammates", cascade=CascadeType.ALL)
     private Set<User> teammates = new HashSet<>();
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Event> events = new HashSet<>(0);
+    @OneToMany(mappedBy = "user")
+    private Set<Event> events = new HashSet<>();
 
     public long getId() {
         return id;

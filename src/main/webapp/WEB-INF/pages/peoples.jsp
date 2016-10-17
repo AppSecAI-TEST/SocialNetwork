@@ -209,7 +209,7 @@
                             <span><c:out value="${book.info}"/></span>
                         </div>
                         <div class="price">
-                            <span><c:out value="${book.username}"/></span>
+                            <a class="event-username" href="/user?id=<c:out value='${book.id}'/>"><p><c:out value="${book.username}"/></p></a>
                         </div>
                         <sec:authorize access="hasRole('ROLE_USER')">
                             <div class="add-button">

@@ -52,6 +52,12 @@
                     <div class="add-button">
                         <a class="add-button-link" href="editBook">Add</a>
                     </div>
+                    <div class="add-button">
+                        <a class="add-button-link" href="/event/createEvent">event</a>
+                    </div>
+                    <div class="add-button">
+                        <a class="add-button-link" href="/friends">allFuckingPeople</a>
+                    </div>
                 </sec:authorize>
             </form:form>
         </div>

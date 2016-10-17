@@ -16,14 +16,14 @@ public class Event implements Serializable {
     private static final long serialVersionUID = -834212703825352154L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "event_id")
+    @Column(name = "event_id", nullable = false)
     private long id;
     @Column(name="head")
     private String head;
     @Column(name = "body")
     private String body;
     @ManyToOne(cascade= CascadeType.ALL)
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
     public long getId() {
         return id;
@@ -47,5 +47,13 @@ public class Event implements Serializable {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

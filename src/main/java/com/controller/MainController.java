@@ -38,6 +38,12 @@ public class MainController {
         return new ModelAndView("Main", "bookObject", user);
     }
 
+    @RequestMapping("/user")
+    public ModelAndView getuser(@ModelAttribute(value = "book") User user,@RequestParam Long id) {
+        user = questionServise.getUser(id);
+        return new ModelAndView("Main", "bookObject", user);
+    }
+
     @RequestMapping("saveBook")
     public ModelAndView saveUser(@ModelAttribute User user) {
             questionServise.update(user);

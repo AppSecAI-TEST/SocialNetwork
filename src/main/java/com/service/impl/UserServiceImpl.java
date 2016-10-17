@@ -1,14 +1,8 @@
 package com.service.impl;
 
 import com.config.AppConfig;
-import com.entity.User;
-import com.entity.UserFriend;
-import com.entity.UserMassageUser;
-import com.entity.UserRole;
-import com.repository.UserFriendRepository;
-import com.repository.UserMassageUserRepository;
-import com.repository.UserRoleRepository;
-import com.repository.UserRepository;
+import com.entity.*;
+import com.repository.*;
 import com.service.UserServise;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -38,6 +32,8 @@ public class UserServiceImpl implements UserServise {
     private UserRoleRepository userRoleRepository;
     @Resource
     private UserMassageUserRepository userMassageUserRepository;
+    @Resource
+    private EventRepository eventRepository;
     @Autowired
     private AppConfig appConfig;
     @Override
@@ -69,18 +65,14 @@ public class UserServiceImpl implements UserServise {
         updateQuestion.setAvatar(user.getAvatar());
         return userRepository.saveAndFlush(updateQuestion);
     }
-
-
     @Override
     public User findByUserName(String username) {
         return userRepository.findByUserName(username);
     }
-
     @Override
     public User getUser(long id) {
         return  userRepository.getUser(id);
     }
-
     @Override
     public void addUser(String name, String surname, String info, String username, String password, String avatar) throws InterruptedException {
         User user = new User();
@@ -107,7 +99,6 @@ public class UserServiceImpl implements UserServise {
         String name =userDetail.getUsername();
         return user = findByUserName(name);
     }
-
     @Override
     public void addToFriends(long id) {
         DefaultTransactionDefinition def = new DefaultTransactionDefinition();
@@ -128,7 +119,6 @@ public class UserServiceImpl implements UserServise {
         }
         appConfig.transactionManager().commit(status);
     }
-
     @Override
     public void accept(long id) {
         DefaultTransactionDefinition def = new DefaultTransactionDefinition();
@@ -146,7 +136,6 @@ public class UserServiceImpl implements UserServise {
         }
         appConfig.transactionManager().commit(status);
     }
-
     @Override
     public void sandMassage(long id , String s) {
         DefaultTransactionDefinition def = new DefaultTransactionDefinition();
@@ -166,6 +155,40 @@ public class UserServiceImpl implements UserServise {
             throw ex;
         }
         appConfig.transactionManager().commit(status);
-
+    }
+    @Override
+    public void createEvent(String head,String body) {
+        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+        def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
+        TransactionStatus status = appConfig.transactionManager().getTransaction(def);
+        try {
+            Event createEvent = new Event();
+            createEvent.setHead(head);
+            createEvent.setBody(body);
+            createEvent.setUser(getCurrentUser());
+            eventRepository.save(createEvent);
+        }
+        catch (Exception ex) {
+            appConfig.transactionManager().rollback(status);
+            throw ex;
+        }
+        appConfig.transactionManager().commit(status);
+    }
+    @Override
+    public Event deleteEvent(long id) {
+        Event deleteEvent = eventRepository.findOne(id);
+        eventRepository.delete(deleteEvent);
+        return deleteEvent;
+    }
+    @Override
+    public Event editEvent(Event event) {
+        Event editEvent = eventRepository.findOne(event.getId());
+        editEvent.setHead(event.getHead());
+        editEvent.setBody(event.getBody());
+        return eventRepository.save(editEvent);
+    }
+    @Override
+    public List<Event> getEvents() {
+        return eventRepository.findAll();
     }
 }
