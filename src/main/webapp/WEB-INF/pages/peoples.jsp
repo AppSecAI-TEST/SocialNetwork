@@ -174,15 +174,13 @@
             </h3>
         </div>
         </sec:authorize>
-        <div class="panel-body">
             <form action="searchBook">
                 <div class="row">
-                        <div><input type='text' name='searchName' id='searchName' placeholder="Search User..."/><input class="btn btn-success srch" type='submit' value='Search' id='searchSubmitButton'/> </div>
+                    <div class="col-md-4">Search Employees: <input type='text' name='searchName' id='searchName'/> </div>
+                    <div class="col-md-4"><input class="btn btn-success" type='submit' value='Search'/></div>
                 </div>
             </form>
-        </div>
-    </div>
-    <c:if test="${empty booksList}">
+        <c:if test="${empty booksList}">
     There are no Books
     </c:if>
     <c:if  test="${not empty booksList}">

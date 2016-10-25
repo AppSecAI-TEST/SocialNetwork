@@ -69,6 +69,12 @@ public class UserServiceImpl implements UserServise {
     public User findByUserName(String username) {
         return userRepository.findByUserName(username);
     }
+
+    @Override
+    public List<User> findByNameOrSurname(String inp) {
+        return  userRepository.findUsers(inp);
+    }
+
     @Override
     public User getUser(long id) {
         return  userRepository.getUser(id);
@@ -199,5 +205,4 @@ public class UserServiceImpl implements UserServise {
     public List<Event> getEvents() {
         return eventRepository.findAll();
     }
-
 }

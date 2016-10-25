@@ -20,14 +20,14 @@ public class EventController {
     private UserServise eventService;
 
     @RequestMapping("/createEvent")
-    ModelAndView createEvent() {
+    public ModelAndView createEvent() {
         return new ModelAndView("eventform");
     }
 
     @RequestMapping("/addEvent")
     public ModelAndView add(@RequestParam String head, @RequestParam String body) {
         eventService.createEvent(head,body);
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/event/");
     }
     @RequestMapping("/")
     public ModelAndView getAllUsers() {

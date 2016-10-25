@@ -12,10 +12,11 @@ import java.util.List;
  */
 public interface UserServise {
      User create(User question);
-     User delete(long id) ;
+     User delete(long id);
      List<User> findAll();
      User update(User question);
      User findByUserName(String username);
+     List<User> findByNameOrSurname(String inp);
      User getUser(long id);
      void addUser(String name, String surname, String info, String username, String password, String avatar) throws InterruptedException;
      User getCurrentUser();
