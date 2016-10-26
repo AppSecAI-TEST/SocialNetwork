@@ -58,6 +58,9 @@
                     <div class="add-button">
                         <a class="add-button-link" href="/friends">allFuckingPeople</a>
                     </div>
+                    <div class="add-button">
+                        <a class="add-button-link" href="/event/myEvents">MyEvents</a>
+                    </div>
                 </sec:authorize>
             </form:form>
         </div>

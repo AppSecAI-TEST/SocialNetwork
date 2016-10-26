@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserServise {
     }
 
     @Override
-    public User delete(long id) {
+    public User deleteUser(long id) {
         User deletedUser = userRepository.findOne(id);
         userRepository.delete(deletedUser);
         return deletedUser;
@@ -188,6 +188,13 @@ public class UserServiceImpl implements UserServise {
         }
         appConfig.transactionManager().commit(status);
     }
+
+    @Override
+    public Event getOneEvent(long id) {
+        Event event = eventRepository.findOne(id);
+        return event;
+    }
+
     @Override
     public Event deleteEvent(long id) {
         Event deleteEvent = eventRepository.findOne(id);
@@ -205,4 +212,15 @@ public class UserServiceImpl implements UserServise {
     public List<Event> getEvents() {
         return eventRepository.findAll();
     }
+
+    @Override
+    public List<Event> findEvent(String param) {
+        return eventRepository.findEvents(param);
+    }
+    @Override
+    public List<Event> getMyEvents() {
+        User user = getCurrentUser();
+        return eventRepository.getPersonEvents(user);
+    }
+
 }

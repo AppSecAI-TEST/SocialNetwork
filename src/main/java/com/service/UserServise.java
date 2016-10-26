@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface UserServise {
      User create(User question);
-     User delete(long id);
+     User deleteUser(long id);
      List<User> findAll();
      User update(User question);
      User findByUserName(String username);
@@ -25,7 +25,10 @@ public interface UserServise {
      void sandMassage(long id ,String s);
      List<UserMassageUser> getAllMassage();
      void createEvent(String head, String body);
+     Event getOneEvent(long id);
      Event deleteEvent(long id);
      Event editEvent(Event event);
      List<Event> getEvents();
+     List<Event> findEvent(String param);
+     List<Event> getMyEvents();
 }

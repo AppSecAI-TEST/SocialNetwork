@@ -70,15 +70,17 @@
         </h3>
     </div>
 </sec:authorize>
-<c:forEach items="${eventList}" var="event">
-<div id="page">
-    <p class="event-head"><c:out value="${event.head}"/></p>
-    <p class="event-body"><p><c:out value="${event.body}"/></p></p>
-    <div>
-        <img class="img-icon" src="data:image/jpeg;base64,${event.user.getImgAsBase64()}">
-        <a class="event-username" href="/user?id=<c:out value='${event.user.id}'/>"><p><c:out value="${event.user.username}"/></p></a>
+<c:forEach items="${myEventList}" var="event">
+    <div id="page">
+        <a class="add-button-link" href="editEvent?id=<c:out value='${event.id}'/>">Edit</a>
+        <p class="event-head"><c:out value="${event.head}"/></p>
+        <p class="event-body"><p><c:out value="${event.body}"/></p></p>
+        <div>
+            <img class="img-icon" src="data:image/jpeg;base64,${event.user.getImgAsBase64()}">
+            <a class="event-username" href="/user?id=<c:out value='${event.user.id}'/>"><p><c:out value="${event.user.username}"/></p></a>
+        </div>
+
     </div>
-</div>
 </c:forEach>
 </body>
 </html>
