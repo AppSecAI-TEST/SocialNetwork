@@ -62,7 +62,6 @@ public class UserServiceImpl implements UserServise {
         updateQuestion.setInfo(user.getInfo());
         updateQuestion.setUsername(user.getUsername());
         updateQuestion.setPassword(user.getPassword());
-        updateQuestion.setAvatar(user.getAvatar());
         return userRepository.saveAndFlush(updateQuestion);
     }
     @Override

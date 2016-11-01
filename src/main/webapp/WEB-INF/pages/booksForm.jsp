@@ -17,6 +17,7 @@
         .myrow-container{
             margin: 20px;
         }
+        .error { color: red; font-size: 0.9em; font-weight: bold; }
     </style>
 </head>
 <body class=".container-fluid">
@@ -48,6 +49,7 @@
                     <form:label path="info" cssClass="control-label col-xs-3">info</form:label>
                     <div class="col-xs-6">
                         <form:input cssClass="form-control" path="info" value="${bookObject.info}"/>
+                        <form:errors path="info" cssClass="error" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -63,13 +65,6 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <form:label path="avatar" cssClass="control-label col-xs-3">img</form:label>
-                    <div class="col-xs-6">
-                        <form:input path="avatar" type="file" value="${bookObject.avatar}"/>
-                        <img src="data:image/jpeg;base64,${bookObject.getImgAsBase64()}">
-                    </div>
-                </div>
 
                 <div class="form-group">
                     <div class="row">

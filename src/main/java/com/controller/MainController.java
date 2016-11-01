@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -36,7 +37,7 @@ public class MainController {
         return new ModelAndView("Main", "bookObject", user);
     }
     @RequestMapping("saveBook")
-    public ModelAndView saveUser(@ModelAttribute User user) {
+    public ModelAndView saveUser(@ModelAttribute @Valid User user) {
             questionServise.update(user);
         return new ModelAndView("redirect:/");
     }

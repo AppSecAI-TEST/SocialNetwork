@@ -2,6 +2,7 @@ package com.entity;
 
 
 
+import com.annotation.FstAnn;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -26,6 +27,7 @@ public class User {
     private String name;
     @Column(name= "surname")
     private String surname;
+    @FstAnn
     @Column(name= "info")
     private String info;
     @Column(name = "username", unique = true, nullable = false, length = 45)
