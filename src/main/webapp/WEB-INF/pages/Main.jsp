@@ -50,13 +50,16 @@
                 </div>
                 <sec:authorize access="hasRole('ROLE_USER')">
                     <div class="add-button">
-                        <a class="add-button-link" href="editBook">Add</a>
+                        <a class="add-button-link" href="editBook">edit</a>
                     </div>
                     <div class="add-button">
                         <a class="add-button-link" href="/event/createEvent">event</a>
                     </div>
                     <div class="add-button">
-                        <a class="add-button-link" href="/friends">allFuckingPeople</a>
+                        <a class="add-button-link" href="/friends">friends</a>
+                    </div>
+                    <div class="add-button">
+                        <a class="add-button-link" href="/allFuckingPeople">allFuckingPeople</a>
                     </div>
                     <div class="add-button">
                         <a class="add-button-link" href="/event/myEvents">MyEvents</a>

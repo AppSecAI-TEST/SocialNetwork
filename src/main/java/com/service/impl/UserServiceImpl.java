@@ -16,11 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-/**
- * Created by bohdan on 15.09.16.
- */
+
 @Service
 @Transactional
 public class UserServiceImpl implements UserServise {
@@ -104,6 +105,7 @@ public class UserServiceImpl implements UserServise {
         String name =userDetail.getUsername();
         return user = findByUserName(name);
     }
+
     @Override
     public void addToFriends(long id) {
         DefaultTransactionDefinition def = new DefaultTransactionDefinition();
@@ -163,11 +165,37 @@ public class UserServiceImpl implements UserServise {
     }
 
     @Override
-    public List<UserMassageUser> getAllMassage() {
-        User user =getCurrentUser();
-        List<UserMassageUser> userMassageUsers = userMassageUserRepository.massage(user);
-        return userMassageUsers;
+    public List<User> getAllFriends() {
+        List<UserFriend> myFriendsList = userFriendRepository.allFriends(getCurrentUser());
+        List<User> myUser = new ArrayList<>();
+        long id = getCurrentUser().getId();
+        for (UserFriend u:myFriendsList) {
+            if(id == u.getFirsUser().getId())
+            {
+                myUser.add(u.getSecondUser());
+            }else myUser.add(u.getFirsUser());
+        }
+        return myUser;
     }
+
+    @Override
+    public Map<Long,List<UserMassageUser>> getAllDialoge() {
+        User user = getCurrentUser();
+        User seccondUser;
+        List<Long> listlong = new ArrayList<>();
+        List<UserMassageUser> userMassageUsers = userMassageUserRepository.massage(user);
+        for (UserMassageUser one : userMassageUsers) {
+            one.getId();
+            listlong.add(one.getId());
+        }
+        Map<Long,List<UserMassageUser>> myMap = new HashMap<>();
+        for (UserMassageUser i : userMassageUsers) {
+
+            myMap.put(i.getSecondUser().getId(), userMassageUsers);
+        }
+        return myMap;
+    }
+
 
     @Override
     public void createEvent(String head,String body) {
@@ -216,10 +244,10 @@ public class UserServiceImpl implements UserServise {
     public List<Event> findEvent(String param) {
         return eventRepository.findEvents(param);
     }
+
     @Override
     public List<Event> getMyEvents() {
         User user = getCurrentUser();
         return eventRepository.getPersonEvents(user);
     }
-
 }

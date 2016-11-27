@@ -15,4 +15,6 @@ import java.util.List;
 public interface UserFriendRepository extends JpaRepository<UserFriend,Long>{
      @Query("select uf from UserFriend uf where uf.firsUser = :id and uf.accept = 0")
      UserFriend acceptFriend(@Param("id") User id);
+     @Query("select ut from UserFriend ut where ut.firsUser = :id or ut.secondUser = :id and ut.accept = 1")
+     List<UserFriend> allFriends(@Param("id") User id);
 }

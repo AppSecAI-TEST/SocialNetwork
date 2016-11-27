@@ -2,6 +2,7 @@ package com.controller;
 
 import com.entity.User;
 import com.service.UserServise;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,15 +13,20 @@ import java.util.List;
 
 @Controller
 public class MainController {
+    private static final Logger log = Logger.getLogger(MainController.class);
     @Autowired
     UserServise questionServise;
 
     @RequestMapping("friends")
     public ModelAndView getAllUsers() {
-        List<User> userList = questionServise.findAll();
+        List<User> userList = questionServise.getAllFriends();
         return new ModelAndView("peoples", "booksList", userList);
     }
-
+    @RequestMapping("allFuckingPeople")
+    public ModelAndView getAllFuckingPeople() {
+        List<User> userList = questionServise.findAll();
+        return new ModelAndView("all", "userList", userList);
+    }
     @RequestMapping(value = "editBook")
     public ModelAndView editUser(@ModelAttribute(value = "book") User user) {
         user = questionServise.getCurrentUser();
@@ -29,6 +35,7 @@ public class MainController {
     @RequestMapping("/")
     public ModelAndView main(@ModelAttribute(value = "book") User user) {
         user = questionServise.getCurrentUser();
+        log.info("Зайшво користувач:" + user.getUsername() +";");
         return new ModelAndView("Main", "bookObject", user);
     }
     @RequestMapping("/user")

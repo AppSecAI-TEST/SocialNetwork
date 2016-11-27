@@ -2,10 +2,12 @@ package com.service;
 
 import com.entity.Event;
 import com.entity.User;
+import com.entity.UserFriend;
 import com.entity.UserMassageUser;
 
 import java.sql.Blob;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by bohdan on 15.09.16.
@@ -23,7 +25,8 @@ public interface UserServise {
      void addToFriends(long user);
      void accept(long id);
      void sandMassage(long id ,String s);
-     List<UserMassageUser> getAllMassage();
+     List<User> getAllFriends();
+     Map<Long,List<UserMassageUser>> getAllDialoge();
      void createEvent(String head, String body);
      Event getOneEvent(long id);
      Event deleteEvent(long id);

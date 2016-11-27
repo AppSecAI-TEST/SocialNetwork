@@ -15,4 +15,6 @@ import java.util.List;
 public interface UserMassageUserRepository extends JpaRepository<UserMassageUser,Long> {
     @Query("select uf from UserMassageUser uf where uf.secondUser = :id1 ")
     List<UserMassageUser> massage(@Param("id1") User id);
+  //  @Query("select ufs from UserMassageUser ufs where ufs.secondUser = :id1 and ufs.firsUser = :id2")
+    //List<UserMassageUser> dialoge(@Param("id1") User id ,@Param("id2") User ids);
 }
