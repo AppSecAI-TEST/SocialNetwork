@@ -136,9 +136,6 @@ public class User {
         String encoded = Base64.getEncoder().encodeToString(avatar);
         return encoded;
     }
-
-
-
     public Set<Event> getEvents() {
         return events;
     }
