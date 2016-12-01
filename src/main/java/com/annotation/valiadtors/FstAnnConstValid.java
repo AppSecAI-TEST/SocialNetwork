@@ -8,6 +8,7 @@ import javax.validation.ConstraintValidatorContext;
 /**
  * Created by bohdan on 01.11.16.
  */
+//Пробна аннотація для валідації по числам
 public class FstAnnConstValid implements ConstraintValidator<FstAnn, String> {
     @Override
     public void initialize(FstAnn field) {

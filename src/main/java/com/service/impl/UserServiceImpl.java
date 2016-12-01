@@ -20,8 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-
+// Вся бізнес-логіка в одному класі так як сутність User є ключовою для всіх інших
 @Service
 @Transactional
 public class UserServiceImpl implements UserServise {

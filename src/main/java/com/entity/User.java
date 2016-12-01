@@ -40,10 +40,6 @@ public class User {
     private byte[] avatar;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private Set<UserRole> userRole = new HashSet<>(0);
-    @OneToMany(mappedBy = "colleagues", cascade=CascadeType.ALL)
-    private Set<User> colleagues = new HashSet<>();
-    @OneToMany(mappedBy = "teammates", cascade=CascadeType.ALL)
-    private Set<User> teammates = new HashSet<>();
     @OneToMany(mappedBy = "user")
     private Set<Event> events = new HashSet<>();
 
@@ -121,7 +117,8 @@ public class User {
     public void setUserRole(Set<UserRole> userRole) {
         this.userRole = userRole;
     }
-
+    // З сервера фото брати не можна , але так як мій ноут сервер то в мене буде працювати
+    // в ідеалі то отримувати base64 зі скріпта
     public byte[] Img(String av)
     {
         File file = new File("/home/bohdan/Картинки/" + av);
@@ -140,21 +137,7 @@ public class User {
         return encoded;
     }
 
-    public Set<User> getColleagues() {
-        return colleagues;
-    }
 
-    public void setColleagues(Set<User> colleagues) {
-        this.colleagues = colleagues;
-    }
-
-    public Set<User> getTeammates() {
-        return teammates;
-    }
-
-    public void setTeammates(Set<User> teammates) {
-        this.teammates = teammates;
-    }
 
     public Set<Event> getEvents() {
         return events;
