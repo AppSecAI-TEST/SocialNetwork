@@ -20,8 +20,8 @@ public class MailController {
     @Autowired
     private UserServise eventService;
     @RequestMapping("/")
-    public ModelAndView mail(@RequestParam Long id) {
-        Map<Long,List<UserMassageUser>> myMap = eventService.getAllDialoge();
+    public ModelAndView mail() {
+        List<UserMassageUser> myMap = eventService.getAllDialoge();
         return new ModelAndView("mail", "massageList", myMap);
     }
 }

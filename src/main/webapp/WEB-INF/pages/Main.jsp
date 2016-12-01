@@ -59,7 +59,7 @@
                         <a class="add-button-link" href="/friends">friends</a>
                     </div>
                     <div class="add-button">
-                        <a class="add-button-link" href="/allFuckingPeople">allFuckingPeople</a>
+                        <a class="add-button-link" href="/allPeople">allPeople</a>
                     </div>
                     <div class="add-button">
                         <a class="add-button-link" href="/event/myEvents">MyEvents</a>

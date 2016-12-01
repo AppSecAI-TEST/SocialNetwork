@@ -179,21 +179,9 @@ public class UserServiceImpl implements UserServise {
     }
 
     @Override
-    public Map<Long,List<UserMassageUser>> getAllDialoge() {
-        User user = getCurrentUser();
-        User seccondUser;
-        List<Long> listlong = new ArrayList<>();
-        List<UserMassageUser> userMassageUsers = userMassageUserRepository.massage(user);
-        for (UserMassageUser one : userMassageUsers) {
-            one.getId();
-            listlong.add(one.getId());
-        }
-        Map<Long,List<UserMassageUser>> myMap = new HashMap<>();
-        for (UserMassageUser i : userMassageUsers) {
-
-            myMap.put(i.getSecondUser().getId(), userMassageUsers);
-        }
-        return myMap;
+    public List<UserMassageUser> getAllDialoge() {
+        List<UserMassageUser> list= userMassageUserRepository.massage(getCurrentUser());
+      return  list;
     }
 
 

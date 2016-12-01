@@ -26,7 +26,7 @@ public interface UserServise {
      void accept(long id);
      void sandMassage(long id ,String s);
      List<User> getAllFriends();
-     Map<Long,List<UserMassageUser>> getAllDialoge();
+     List<UserMassageUser> getAllDialoge();
      void createEvent(String head, String body);
      Event getOneEvent(long id);
      Event deleteEvent(long id);
