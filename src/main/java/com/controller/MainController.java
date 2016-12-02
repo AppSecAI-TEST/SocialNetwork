@@ -35,7 +35,7 @@ public class MainController {
     @RequestMapping("/")
     public ModelAndView main(@ModelAttribute(value = "user") User user) {
         user = questionServise.getCurrentUser();
-        log.info("Зайшво користувач:" + user.getUsername() +";");
+        log.info("Зайшов користувач:" + user.getUsername() +";");
         return new ModelAndView("Main", "userObject", user);
     }
     @RequestMapping("/user")

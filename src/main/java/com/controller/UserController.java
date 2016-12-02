@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
+
 
 /**
  * Created by bohdan on 26.09.16.
@@ -22,7 +24,7 @@ public class UserController {
 
     @RequestMapping("createUser")
     public ModelAndView createUser(@ModelAttribute User book) {
-        return new ModelAndView("usersForm");
+        return new ModelAndView("userForm");
     }
 
     @RequestMapping("addUser")

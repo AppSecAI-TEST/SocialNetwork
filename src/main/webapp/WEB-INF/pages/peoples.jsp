@@ -176,7 +176,7 @@
         </sec:authorize>
             <form action="searchUser">
                 <div class="row">
-                    <div class="col-md-4">Search Employees: <input type='text' name='searchName' id='searchName'/> </div>
+                    <div class="col-md-4">Search Users: <input type='text' name='searchName' id='searchName'/> </div>
                     <div class="col-md-4"><input class="btn btn-success" type='submit' value='Search'/></div>
                 </div>
             </form>
