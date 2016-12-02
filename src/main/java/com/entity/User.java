@@ -43,6 +43,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Event> events = new HashSet<>();
 
+    public User() {
+    }
+
     public long getId() {
         return id;
     }

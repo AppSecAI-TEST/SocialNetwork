@@ -22,6 +22,9 @@ public class UserFriend implements Serializable{
     @Column(name = "activated")
     private int accept;
 
+    public UserFriend() {
+    }
+
     public int getAccept() {
         return accept;
     }

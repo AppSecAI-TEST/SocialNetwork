@@ -22,6 +22,9 @@ public class UserMassageUser implements Serializable{
     @Column(name = "massage")
     private String massage;
 
+    public UserMassageUser() {
+    }
+
     public String getMassage() {
         return massage;
     }
