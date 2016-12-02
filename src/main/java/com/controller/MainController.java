@@ -20,30 +20,30 @@ public class MainController {
     @RequestMapping("friends")
     public ModelAndView getAllUsers() {
         List<User> userList = questionServise.getAllFriends();
-        return new ModelAndView("peoples", "booksList", userList);
+        return new ModelAndView("peoples", "usersList", userList);
     }
     @RequestMapping("allPeople")
-    public ModelAndView getAllFuckingPeople() {
+    public ModelAndView getAllPeople() {
         List<User> userList = questionServise.findAll();
         return new ModelAndView("all", "userList", userList);
     }
-    @RequestMapping(value = "editBook")
-    public ModelAndView editUser(@ModelAttribute(value = "book") User user) {
+    @RequestMapping(value = "editUser")
+    public ModelAndView editUser(@ModelAttribute(value = "user") User user) {
         user = questionServise.getCurrentUser();
-        return new ModelAndView("booksForm", "bookObject", user);
+        return new ModelAndView("usersForm", "userObject", user);
     }
     @RequestMapping("/")
-    public ModelAndView main(@ModelAttribute(value = "book") User user) {
+    public ModelAndView main(@ModelAttribute(value = "user") User user) {
         user = questionServise.getCurrentUser();
         log.info("Зайшво користувач:" + user.getUsername() +";");
-        return new ModelAndView("Main", "bookObject", user);
+        return new ModelAndView("Main", "userObject", user);
     }
     @RequestMapping("/user")
-    public ModelAndView getuser(@ModelAttribute(value = "book") User user,@RequestParam Long id) {
+    public ModelAndView getuser(@ModelAttribute(value = "user") User user,@RequestParam Long id) {
         user = questionServise.getUser(id);
-        return new ModelAndView("Main", "bookObject", user);
+        return new ModelAndView("Main", "userObject", user);
     }
-    @RequestMapping("saveBook")
+    @RequestMapping("saveUser")
     public ModelAndView saveUser(@ModelAttribute @Valid User user) {
             questionServise.update(user);
         return new ModelAndView("redirect:/");
@@ -58,15 +58,15 @@ public class MainController {
         questionServise.accept(id);
         return new ModelAndView("redirect:/friends");
     }
-    @RequestMapping("sand")
+    @RequestMapping("send")
     public ModelAndView sandMassage(@RequestParam Long id, @RequestParam String massage) {
         questionServise.sandMassage(id,massage);
         return new ModelAndView("redirect:/friends");
     }
-    @RequestMapping(value = "searchBook",method = RequestMethod.GET,headers="Accept=application/json")
+    @RequestMapping(value = "searchUser",method = RequestMethod.GET,headers="Accept=application/json")
     @ResponseBody
     public ModelAndView searchUser(@RequestParam("searchName") String searchName) {
         List<User> userList = questionServise.findByNameOrSurname(searchName);
-        return new ModelAndView("peoples","booksList",userList);
+        return new ModelAndView("peoples","booksUser",userList);
     }
 }

@@ -174,52 +174,52 @@
             </h3>
         </div>
         </sec:authorize>
-        <form action="searchBook">
+        <form action="searchUser">
             <div class="row">
                 <div class="col-md-4">Search Employees: <input type='text' name='searchName' id='searchName'/> </div>
                 <div class="col-md-4"><input class="btn btn-success" type='submit' value='Search'/></div>
             </div>
         </form>
         <c:if test="${empty userList}">
-        There are no Books
+        There are no Users
         </c:if>
         <c:if  test="${not empty userList}">
 
 
         <div class="container main-container">
             <div class="row" id="parentRowContainer">
-                <c:forEach items="${userList}" var="book">
+                <c:forEach items="${userList}" var="user">
                     <div class="col-lg-4 col-md-6 one-book">
                         <div class="row books-row">
                             <div class="col-xs-6 book-container">
                                 <div class="img-wrapper">
-                                    <img src="data:image/jpeg;base64,${book.getImgAsBase64()}">
+                                    <img src="data:image/jpeg;base64,${user.getImgAsBase64()}">
                                 </div>
                             </div>
                             <div class="col-xs-6 book-container">
                                 <div class="book-name">
-                                    <p><c:out value="${book.name}"/></p>
+                                    <p><c:out value="${user.name}"/></p>
                                 </div>
                                 <div class="author">
-                                    <p><c:out value="${book.surname}"/></p>
+                                    <p><c:out value="${user.surname}"/></p>
                                 </div>
                                 <div class="genre">
-                                    <span><c:out value="${book.info}"/></span>
+                                    <span><c:out value="${user.info}"/></span>
                                 </div>
                                 <div class="price">
-                                    <a class="event-username" href="/user?id=<c:out value='${book.id}'/>"><p><c:out value="${book.username}"/></p></a>
+                                    <a class="event-username" href="/user?id=<c:out value='${user.id}'/>"><p><c:out value="${user.username}"/></p></a>
                                 </div>
                                 <sec:authorize access="hasRole('ROLE_USER')">
                                     <div class="add-button">
-                                        <a class="add-button-link" href="addToFriends?id=<c:out value='${book.id}'/>">Add</a>
+                                        <a class="add-button-link" href="addToFriends?id=<c:out value='${user.id}'/>">Add</a>
                                     </div>
                                     <form:form id="form" cssClass="form-horizontal" method="post" action="sand">
-                                        <input type="hidden" name="id" value="${book.id}"/>
+                                        <input type="hidden" name="id" value="${user.id}"/>
                                         <input class="form-control" type='text' name='massage' placeholder="massage...">
                                         <input type="submit" class="btn btn-primary" value="sand"/>
                                     </form:form>
                                 </sec:authorize>
-                                <a class="add-button-link" href="accept?id=<c:out value='${book.id}'/>">Add</a>
+                                <a class="add-button-link" href="accept?id=<c:out value='${user.id}'/>">Add</a>
                             </div>
                         </div>
                     </div>

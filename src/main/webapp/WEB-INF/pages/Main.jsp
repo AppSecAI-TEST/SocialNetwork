@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Book Information</title>
+    <title>User Information</title>
     <!-- Bootstrap CSS -->
     <%-- <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet"> --%>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -25,32 +25,32 @@
     <div class="panel panel-success">
         <div class="panel-heading">
             <h3 class="panel-title">
-                Book Details
+                User Details
             </h3>
         </div>
         <div class="panel-body">
-            <form:form id="booksRegisterForm" cssClass="form-horizontal" modelAttribute="book" method="post" action="saveBook">
-                <th><a href="deleteBooks?id=<c:out value='${books.id}'/>">Delete</a></th>
+            <form:form id="booksRegisterForm" cssClass="form-horizontal" modelAttribute="user" method="post" action="saveUser">
+                <th><a href="deleteUsers?id=<c:out value='${users.id}'/>">Delete</a></th>
                 <div class="form-group">
-                    <div class="control-label col-xs-3"> <form:label path="name" >${bookObject.name}</form:label> </div>
+                    <div class="control-label col-xs-3"> <form:label path="name" >${userObject.name}</form:label> </div>
                     <div class="col-xs-6">
-                        <form:hidden path="id" value="${bookObject.id}"/>
+                        <form:hidden path="id" value="${userObject.id}"/>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <form:label path="surname" cssClass="control-label col-xs-3">${bookObject.surname}</form:label>
+                    <form:label path="surname" cssClass="control-label col-xs-3">${userObject.surname}</form:label>
                 </div>
                 <div class="form-group">
-                    <form:label path="info" cssClass="control-label col-xs-3">${bookObject.info}</form:label>
+                    <form:label path="info" cssClass="control-label col-xs-3">${userObject.info}</form:label>
                 </div>
 
                 <div class="form-group">
-                    <form:label path="avatar" cssClass="control-label col-xs-3"><img src="data:image/jpeg;base64,${bookObject.getImgAsBase64()}"></form:label>
+                    <form:label path="avatar" cssClass="control-label col-xs-3"><img src="data:image/jpeg;base64,${userObject.getImgAsBase64()}"></form:label>
                 </div>
                 <sec:authorize access="hasRole('ROLE_USER')">
                     <div class="add-button">
-                        <a class="add-button-link" href="editBook">edit</a>
+                        <a class="add-button-link" href="editUser">edit</a>
                     </div>
                     <div class="add-button">
                         <a class="add-button-link" href="/event/createEvent">event</a>

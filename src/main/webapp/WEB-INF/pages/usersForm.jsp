@@ -2,6 +2,7 @@
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,105 +12,82 @@
     <title>User Information</title>
     <!-- Bootstrap CSS -->
     <%-- <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet"> --%>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <style type="text/css">
         .myrow-container{
             margin: 20px;
         }
-        .title {
-            text-align: center;
-            font-size: 30px;
-            font-weight: 900;
-        }
-        .registration-container {
-            margin: 0 auto;
-            min-width: 600px;
-            max-height: 800px;
-        }
-        .form-control {
-            border: none;
-            border-bottom: 1px solid #999;
-            margin: 0 auto;
-            padding-left: 30px;
-            padding-right: 30px;
-            width: 40%;
-            box-shadow: none;
-            -webkit-box-shadow: none;
-            border-radius: 0px;
-            margin-top: 30px;
-        }
-        #addUser {
-            margin: 0 auto;
-            width: 40%;
-            display: block;
-            margin-top: 30px;
-        }
-
+        .error { color: red; font-size: 0.9em; font-weight: bold; }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-offset-4 col-xs-4 col-xs-offset-4">
-                <h3 class="title">
-                    Users Registration
-                </h3>
-            </div>
-                <form:form id="usersRegisterForm" cssClass="form-horizontal"  method="post" action="addUser" enctype="multipart/form- data">
-                    <div class="container registration-container">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <input class="form-control" type='text' name='name' placeholder="Your Name...">
-                            </div>
-                            <div class="col-xs-12">
-                                <input class="form-control" type='text' name='surname' placeholder="Surname...">
-                            </div>
-                            <div class="col-xs-12">
-                                <input class="form-control" type='text' name='info' placeholder="info about you...">
-                            </div>
-                            <div class="col-xs-12">
-                                <input class="form-control" type='text' name='username' placeholder="username...">
-                            </div>
-                            <div class="col-xs-12">
-                                <input class="form-control" type='password' name='password' placeholder="Password...">
-                            </div>
-                            <div class="col-xs-12">
-                                <input class="form-control" type='file' name='avatar'>
-                            </div>
-                            <div class="col-xs-12">
-                                <input type="submit" id="addUser" class="btn btn-primary" value="Save" onclick="return submitUserForm();"/>
-                            </div>
+<body class=".container-fluid">
+<div class="container myrow-container">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                User Details
+            </h3>
+        </div>
+        <div class="panel-body">
+            <form:form id="booksRegisterForm" cssClass="form-horizontal" modelAttribute="user" method="post" action="saveUser">
+                <th><a href="deleteUsers?id=<c:out value='${users.id}'/>">Delete</a></th>
+                <div class="form-group">
+                    <div class="control-label col-xs-3"> <form:label path="name" >name</form:label> </div>
+                    <div class="col-xs-6">
+                        <form:hidden path="id" value="${userObject.id}"/>
+                        <form:input cssClass="form-control" path="name" value="${userObject.name}"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <form:label path="surname" cssClass="control-label col-xs-3">surname</form:label>
+                    <div class="col-xs-6">
+                        <form:input cssClass="form-control" path="surname" value="${userObject.surname}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <form:label path="info" cssClass="control-label col-xs-3">info</form:label>
+                    <div class="col-xs-6">
+                        <form:input cssClass="form-control" path="info" value="${userObject.info}"/>
+                        <form:errors path="info" cssClass="error" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <form:label path="username" cssClass="control-label col-xs-3">username</form:label>
+                    <div class="col-xs-6">
+                        <form:input cssClass="form-control" path="username" value="${userObject.username}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <form:label path="password" cssClass="control-label col-xs-3">password</form:label>
+                    <div class="col-xs-6">
+                        <form:input cssClass="form-control" path="password" value="${userObject.password}"/>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4">
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="submit" id="saveUser" class="btn btn-primary" value="Save"/>
+                        </div>
+                        <div class="col-xs-4">
                         </div>
                     </div>
-                </form:form>
+                </div>
+            </form:form>
         </div>
     </div>
+</div>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	
-	<script type="text/javascript">
-		function submitUserForm() {
-			
-		    // getting the User form values
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-		    var username = $('#username').val();
-            var password = $('#password').val();
+<script type="text/javascript">
 
-		    if(password <= 0) {
-		        alert('Please enter proper password');
-		        $('#paswword').focus();
-		        return false;
-		    }
-	
-		    if(username <= 0) {
-		        alert('Please enter proper username');
-		        $('#username').focus();
-		        return false;
-		    }
-		    return true;
-		};	
-	</script>
+</script>
 
 </body>
 </html>
