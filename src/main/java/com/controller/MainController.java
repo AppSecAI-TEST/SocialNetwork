@@ -34,8 +34,14 @@ public class MainController {
     }
     @RequestMapping("/")
     public ModelAndView main(@ModelAttribute(value = "user") User user) {
-        user = questionServise.getCurrentUser();
-        log.info("Зайшов користувач:" + user.getUsername() +";");
+        try {
+            user = questionServise.getCurrentUser();
+        }
+        catch (Exception e)
+        {
+            return new ModelAndView("redirect:/login/");
+        }
+
         return new ModelAndView("Main", "userObject", user);
     }
     @RequestMapping("/user")
