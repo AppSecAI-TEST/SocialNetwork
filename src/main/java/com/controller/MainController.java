@@ -37,11 +37,9 @@ public class MainController {
         try {
             user = questionServise.getCurrentUser();
         }
-        catch (Exception e)
-        {
+         catch (ClassCastException e) {
             return new ModelAndView("redirect:/login/");
         }
-
         return new ModelAndView("Main", "userObject", user);
     }
     @RequestMapping("/user")
@@ -73,6 +71,6 @@ public class MainController {
     @ResponseBody
     public ModelAndView searchUser(@RequestParam("searchName") String searchName) {
         List<User> userList = questionServise.findByNameOrSurname(searchName);
-        return new ModelAndView("peoples","booksUser",userList);
+        return new ModelAndView("peoples","userList",userList);
     }
 }

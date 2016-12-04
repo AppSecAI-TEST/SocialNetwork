@@ -1,12 +1,9 @@
 package com.entity;
 
-
-
 import com.annotation.FstAnn;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Base64;
@@ -27,7 +24,8 @@ public class User {
     private String name;
     @Column(name= "surname")
     private String surname;
-    @FstAnn
+    //тестове поле для номера телефона
+    @FstAnn @Size(min = 10 , max = 13)
     @Column(name= "info")
     private String info;
     @Column(name = "username", unique = true, nullable = false, length = 45)

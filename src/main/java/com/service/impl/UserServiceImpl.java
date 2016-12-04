@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserServise {
         return  userRepository.getUser(id);
     }
     @Override
-    public void addUser(String name, String surname, String info, String username, String password, String avatar) throws InterruptedException {
+    public void addUser(String name, String surname, String info, String username, String password, String avatar){
         User user = new User();
         UserRole userRole = new UserRole();
         user.setName(name);
@@ -92,7 +92,6 @@ public class UserServiceImpl implements UserServise {
         userRole.setUser(user);
         userRole.setRole("ROLE_USER");
         userRoleRepository.save(userRole);
-        Thread.sleep(200);
         userRepository.save(user);
     }
 
